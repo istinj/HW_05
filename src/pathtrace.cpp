@@ -21,7 +21,7 @@ vec3f eval_brdf(vec3f kd, vec3f ks, float n, vec3f v, vec3f l, vec3f norm, bool 
 // evaluate the environment map
 vec3f eval_env(vec3f ke, image3f* ke_txt, vec3f dir) {
     // YOUR CODE GOES HERE ----------------------
-    if(not ke_txt) return zero3f;
+    if(! ke_txt) return zero3f;
     else return one3f;
 }
 
@@ -61,7 +61,7 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
     auto intersection = intersect(scene,ray);
     
     // if not hit, return background (looking up the texture by converting the ray direction to latlong around y)
-    if(not intersection.hit) {
+    if(! intersection.hit) {
         // YOUR CODE GOES HERE ----------------------
         return zero3f;
     }
@@ -100,7 +100,7 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
         // if shadows are enabled
         if(scene->path_shadows) {
             // perform a shadow check and accumulate
-            if(not intersect_shadow(scene,ray3f::make_segment(pos,light->frame.o))) c += shade;
+            if(! intersect_shadow(scene,ray3f::make_segment(pos,light->frame.o))) c += shade;
         } else {
             // else just accumulate
             c += shade;
@@ -226,7 +226,7 @@ int main(int argc, char** argv) {
         args.object_element("image_filename").as_string() :
         scene_filename.substr(0,scene_filename.size()-5)+".png";
     auto scene = load_json_scene(scene_filename);
-    if(not args.object_element("resolution").is_null()) {
+    if(! args.object_element("resolution").is_null()) {
         scene->image_height = args.object_element("resolution").as_int();
         scene->image_width = scene->camera->width * scene->image_height / scene->camera->height;
     }

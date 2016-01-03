@@ -1,55 +1,7 @@
-﻿Compilazione avviata 17/12/2015 15:35:39.
+﻿Compilazione avviata 03/01/2016 17:59:17.
      1>Progetto "C:\Users\Istin\Documents\Foundation of Computer Graphics\HW05\out (5)\pathtrace.vcxproj" sul nodo 2 (destinazioni: Build).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Za /Zc:wchar_t /Zc:forScope /Fo"build\Release\\" /Fd"build\Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\image.cpp src\intersect.cpp src\json.cpp src\lodepng.cpp src\pathtrace.cpp src\scene.cpp src\tesselation.cpp
-         image.cpp
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(59): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(60): warning C4800: 'FILE *': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
-     1>src\image.cpp(10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>src\image.cpp(18): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(230): vedere la dichiarazione di 'fscanf'
-     1>src\image.cpp(29): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(230): vedere la dichiarazione di 'fscanf'
-     1>src\image.cpp(33): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(230): vedere la dichiarazione di 'fscanf'
-     1>src\image.cpp(43): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(230): vedere la dichiarazione di 'fscanf'
-     1>src\image.cpp(51): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(304): vedere la dichiarazione di 'sscanf'
-     1>src\image.cpp(96): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>src\image.cpp(155): warning C4018: '<': errata corrispondenza tra signed e unsigned
-         intersect.cpp
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(59): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(60): warning C4800: 'FILE *': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(159): warning C4305: 'argomento': troncamento da 'double' a 'float'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(161): warning C4305: 'argomento': troncamento da 'double' a 'float'
-         json.cpp
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(59): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(60): warning C4800: 'FILE *': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
-     1>src\json.cpp(90): warning C4101: 'e': variabile locale senza riferimenti
-         lodepng.cpp
-     1>src\lodepng.cpp(381): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>src\lodepng.cpp(403): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>src\lodepng.cpp(3463): warning C4244: 'argomento': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3471): warning C4244: 'argomento': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3473): warning C4244: 'argomento': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3478): warning C4244: '=': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3479): warning C4244: '=': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3480): warning C4244: '=': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
-     1>src\lodepng.cpp(3481): warning C4244: '=': conversione da 'unsigned short' a 'unsigned char'. Possibile perdita di dati.
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Za /Zc:wchar_t /Zc:forScope /Fo"build\Release\\" /Fd"build\Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\pathtrace.cpp
          pathtrace.cpp
      1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
@@ -68,25 +20,6 @@
      1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\montecarlo.h(106): warning C4244: 'return': conversione da 'const double' a 'float'. Possibile perdita di dati.
      1>src\pathtrace.cpp(181): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
      1>src\pathtrace.cpp(231): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
-         scene.cpp
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(59): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(60): warning C4800: 'FILE *': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(159): warning C4305: 'argomento': troncamento da 'double' a 'float'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(161): warning C4305: 'argomento': troncamento da 'double' a 'float'
-     1>src\scene.cpp(61): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-     1>src\scene.cpp(150): warning C4305: 'argomento': troncamento da 'double' a 'float'
-         tesselation.cpp
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(29): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356): vedere la dichiarazione di 'vsprintf'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(59): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(211): vedere la dichiarazione di 'fopen'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\common.h(60): warning C4800: 'FILE *': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(159): warning C4305: 'argomento': troncamento da 'double' a 'float'
-     1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\scene.h(161): warning C4305: 'argomento': troncamento da 'double' a 'float'
-     1>src\tesselation.cpp(151): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Release\pathtrace.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"bin\Release\pathtrace.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\Release\pathtrace.lib" /MACHINE:X86 /SAFESEH build\Release\image.obj
          build\Release\intersect.obj
@@ -102,4 +35,4 @@
 
 Compilazione completata.
 
-Tempo trascorso 00:00:09.33
+Tempo trascorso 00:00:06.17
