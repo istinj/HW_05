@@ -51,7 +51,23 @@ vec3f lookup_scaled_texture(vec3f value, image3f* texture, vec2f uv, bool tile =
 vec3f eval_brdf(vec3f kd, vec3f ks, float n, vec3f v, vec3f l, vec3f norm, bool microfacet) {
     // YOUR CODE GOES HERE ----------------------
     auto h = normalize(v+l); // placeholder (non-microfacet model)
-    return kd/pif + ks*(n+8)/(8*pif) * pow(max(0.0f,dot(norm,h)),n); // placeholder (non-microfacet model)
+	vec3f resulting_brdf = zero3f;
+
+	if (!microfacet)
+	{
+		resulting_brdf = kd / pif + ks*(n + 8) / (8 * pif) * pow(max(0.0f, dot(norm, h)), n); // placeholder (non-microfacet model)
+		return resulting_brdf;
+	}
+	else
+	{
+		auto d = ((n + 2) / (2 * pif)) * pow(max(0.0f, dot(h, norm)), n);
+		auto f = ks + (one3f - ks) * (1 - dot(h, l));
+		auto g_temp = min((2.0f * dot(h, norm) * dot(v, norm)) / dot(v, h), (2.0f * dot(h, norm) * dot(l, norm)) / dot(l, h));
+		auto g = min(1.0f, g_temp);
+
+		resulting_brdf = (d * g * f) / (4.0f * dot(l, norm) * dot(v, norm));
+		return resulting_brdf;
+	}
 }
 
 // evaluate the environment map
