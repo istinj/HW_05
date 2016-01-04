@@ -205,9 +205,9 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 		vec3f light_dir = normalize(S - pos);
 
 		vec3f c_l = L_e * max(0.0f, -(1) * dot(N_l, light_dir)) / lengthSqr(pos - S);
-		vec3f mat_resp = max(dot(norm, light_dir), 0.0f) * eval_brdf(kd, ks, n, v, light_dir, norm, mf);
+		vec3f brdfcos = max(dot(norm, light_dir), 0.0f) * eval_brdf(kd, ks, n, v, light_dir, norm, mf);
 
-		auto shade = c_l * mat_resp;
+		auto shade = c_l * brdfcos;
 		if (shade == zero3f)
 			continue;
 		
@@ -243,6 +243,26 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
             // else just accumulate
     
     // YOUR ENVIRONMENT LIGHT CODE GOES HERE ----------------------
+	if (scene->background_txt != nullptr)
+	{
+		auto env_sample = sample_brdf(kd, ks, n, v, norm, rng->next_vec2f(), rng->next_float());
+		vec3f env_dir = env_sample.first;
+		float env_pdf = env_sample.second;
+
+		vec3f brdfcos = max(dot(norm, env_dir), 0.0f) * eval_brdf(kd, ks, n, v, env_dir, norm, mf);
+		vec3f c_env = eval_env(scene->background, scene->background_txt, env_dir) / env_pdf;
+
+		vec3f shade = brdfcos * c_env;
+
+		if (scene->path_shadows)
+		{
+			auto shadow_ray_env = ray3f(pos, env_dir);
+			if (!intersect_shadow(scene, shadow_ray_env))
+				c += shade;
+		}
+		else
+			c += shade;
+	}
     // sample the brdf for environment illumination if the environment is there
         // pick direction and pdf
         // compute the material response (brdf*cos)
