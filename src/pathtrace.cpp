@@ -172,6 +172,54 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
     }
     
     // YOUR AREA LIGHT CODE GOES HERE ----------------------
+	for (auto surf_ : scene->surfaces)
+	{
+		if (surf_->mat->ke == zero3f)
+			continue;
+		vec2f uv;
+		vec3f N_l, S;
+		float area;
+
+		if (surf_->isquad)
+		{
+			uv = rng->next_vec2f();
+			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5f, uv.y - 0.5f, 0.0f)); // ????
+			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
+			area = sqr(2.0f * surf_->radius);
+
+			intersection.texcoord = uv;
+		}
+		else
+		{
+			uv = rng->next_vec2f();
+			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5, uv.y - 0.5, 0.0f)); // ????
+			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
+			area = pif * sqr(sqr(surf_->radius));
+
+			intersection.texcoord = uv;
+		}
+
+		vec3f ke_alight = lookup_scaled_texture(surf_->mat->ke, surf_->mat->ke_txt, uv);
+		vec3f L_e = ke_alight * area;
+
+		vec3f light_dir = normalize(S - pos);
+
+		vec3f c_l = L_e * max(0.0f, -(1) * dot(N_l, light_dir)) / lengthSqr(pos - S);
+		vec3f mat_resp = max(dot(norm, light_dir), 0.0f) * eval_brdf(kd, ks, n, v, light_dir, norm, mf);
+
+		auto shade = c_l * mat_resp;
+		if (shade == zero3f)
+			continue;
+		
+		if (scene->path_shadows)
+		{
+			auto shadow_ray = ray3f::make_segment(pos, S);
+			if (!intersect_shadow(scene, shadow_ray))
+				c += shade;
+		}
+		else
+			c += shade;
+	}
     // foreach surface
         // skip if no emission from surface
         // pick a point on the surface, grabbing normal, area and texcoord
