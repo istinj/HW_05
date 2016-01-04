@@ -24,16 +24,17 @@ vec3f lookup_scaled_texture(vec3f value, image3f* texture, vec2f uv, bool tile =
     // YOUR CODE GOES HERE ----------------------
 	if (texture != nullptr)
 	{
-		int i = uv.x * texture->width();
-		int j = uv.y * texture->height();
-		i = clamp_tile(i, texture->width(), tile);
-		j = clamp_tile(j, texture->height(), tile);
+		int i = int(uv.x * texture->width());
+		int j = int(uv.y * texture->height());
 
 		float s = (uv.x * texture->width()) - i;
 		float t = (uv.y * texture->height()) - j;
 
 		int ii = i + 1;
 		int jj = j + 1;
+
+		i = clamp_tile(i, texture->width(), tile);
+		j = clamp_tile(j, texture->height(), tile);
 		ii = clamp_tile(ii, texture->width(), tile);
 		jj = clamp_tile(jj, texture->height(), tile);
 
@@ -145,6 +146,8 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
     
     // add emission if on the first bounce
     // YOUR CODE GOES HERE ----------------------
+	if (depth == 0)
+		c += ke;
     
     // foreach point light
     for(auto light : scene->lights) {
