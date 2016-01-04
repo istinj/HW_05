@@ -1,4 +1,4 @@
-﻿Compilazione avviata 04/01/2016 18:13:38.
+﻿Compilazione avviata 04/01/2016 18:38:30.
      1>Progetto "C:\Users\Istin\Documents\Foundation of Computer Graphics\HW05\out (5)\pathtrace.vcxproj" sul nodo 2 (destinazioni: Build).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Za /Zc:wchar_t /Zc:forScope /Fo"build\Release\\" /Fd"build\Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\pathtrace.cpp
@@ -19,8 +19,8 @@
      1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\montecarlo.h(101): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
      1>c:\users\istin\documents\foundation of computer graphics\hw05\out (5)\src\montecarlo.h(106): warning C4244: 'return': conversione da 'const double' a 'float'. Possibile perdita di dati.
      1>src\pathtrace.cpp(195): warning C4244: 'argomento': conversione da 'double' a 'float'. Possibile perdita di dati.
-     1>src\pathtrace.cpp(313): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
-     1>src\pathtrace.cpp(363): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
+     1>src\pathtrace.cpp(327): warning C4244: 'argomento': conversione da 'int' a 'float'. Possibile perdita di dati.
+     1>src\pathtrace.cpp(377): warning C4244: '=': conversione da 'float' a 'int'. Possibile perdita di dati.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Release\pathtrace.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"bin\Release\pathtrace.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\Release\pathtrace.lib" /MACHINE:X86 /SAFESEH build\Release\image.obj
          build\Release\intersect.obj
@@ -36,4 +36,4 @@
 
 Compilazione completata.
 
-Tempo trascorso 00:00:05.10
+Tempo trascorso 00:00:05.27
