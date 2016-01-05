@@ -172,125 +172,144 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
     }
     
     // YOUR AREA LIGHT CODE GOES HERE ----------------------
+	// foreach surface
 	for (auto surf_ : scene->surfaces)
 	{
+		// skip if no emission from surface
 		if (surf_->mat->ke == zero3f)
 			continue;
+		// pick a point on the surface, grabbing normal, area and texcoord
 		vec2f uv;
 		vec3f N_l, S;
 		float area;
 
+		// check if quad
 		if (surf_->isquad)
 		{
+			// generate a 2d random number
 			uv = rng->next_vec2f();
+			// compute light position, normal, area
 			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5f, uv.y - 0.5f, 0.0f)); // ????
 			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
 			area = sqr(2.0f * surf_->radius);
 
+			// set tex coords as random value got before
 			intersection.texcoord = uv;
 		}
+		// else
 		else
 		{
+			// generate a 2d random number
 			uv = rng->next_vec2f();
+			// compute light position, normal, area
 			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5, uv.y - 0.5, 0.0f)); // ????
 			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
 			area = pif * sqr(sqr(surf_->radius));
 
+			// set tex coords as random value got before
 			intersection.texcoord = uv;
 		}
 
+		// get light emission from material and texture
 		vec3f ke_alight = lookup_scaled_texture(surf_->mat->ke, surf_->mat->ke_txt, uv);
 		vec3f L_e = ke_alight * area;
 
+		// compute light direction
 		vec3f light_dir = normalize(S - pos);
 
+		// compute light response
 		vec3f c_l = L_e * max(0.0f, -(1) * dot(N_l, light_dir)) / lengthSqr(pos - S);
+		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, light_dir), 0.0f) * eval_brdf(kd, ks, n, v, light_dir, norm, mf);
-
+		
+		// multiply brdf and light
 		auto shade = c_l * brdfcos;
 		if (shade == zero3f)
 			continue;
-		
+
+		// check for shadows and accumulate if needed
+		// if shadows are enabled
 		if (scene->path_shadows)
 		{
+			// perform a shadow check and accumulate
 			auto shadow_ray = ray3f::make_segment(pos, S);
 			if (!intersect_shadow(scene, shadow_ray))
 				c += shade;
 		}
+		// else
 		else
+			// else just accumulate
 			c += shade;
 	}
-    // foreach surface
-        // skip if no emission from surface
-        // pick a point on the surface, grabbing normal, area and texcoord
-        // check if quad
-            // generate a 2d random number
-            // compute light position, normal, area
-            // set tex coords as random value got before
-        // else
-            // generate a 2d random number
-            // compute light position, normal, area
-            // set tex coords as random value got before
-        // get light emission from material and texture
-        // compute light direction
-        // compute light response
-        // compute the material response (brdf*cos)
-        // multiply brdf and light
-        // check for shadows and accumulate if needed
-        // if shadows are enabled
-            // perform a shadow check and accumulate
-        // else
-            // else just accumulate
+
+
+
+
+        
+        
+            
+        
+            
     
     // YOUR ENVIRONMENT LIGHT CODE GOES HERE ----------------------
 	if (scene->background_txt != nullptr)
 	{
+		// sample the brdf for environment illumination if the environment is there
 		auto env_sample = sample_brdf(kd, ks, n, v, norm, rng->next_vec2f(), rng->next_float());
+		// pick direction and pdf
 		vec3f env_dir = env_sample.first;
 		float env_pdf = env_sample.second;
 
+		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, env_dir), 0.0f) * eval_brdf(kd, ks, n, v, env_dir, norm, mf);
+		// accumulate recersively scaled by brdf*cos/pdf
 		vec3f c_env = eval_env(scene->background, scene->background_txt, env_dir) / env_pdf;
-
 		vec3f shade = brdfcos * c_env;
 
+		// if shadows are enabled
 		if (scene->path_shadows)
 		{
+			// perform a shadow check and accumulate
 			auto shadow_ray_env = ray3f(pos, env_dir);
 			if (!intersect_shadow(scene, shadow_ray_env))
 				c += shade;
 		}
+		// else
 		else
+			// else just accumulate
 			c += shade;
 	}
-    // sample the brdf for environment illumination if the environment is there
-        // pick direction and pdf
-        // compute the material response (brdf*cos)
-        // accumulate recersively scaled by brdf*cos/pdf
-            // if shadows are enabled
-                // perform a shadow check and accumulate
-            // else
-                // else just accumulate
+    
+        
+        
+        
+            
+                
+            
+                
 
     // YOUR INDIRECT ILLUMINATION CODE GOES HERE ----------------------
 	if (depth < scene->path_max_depth)
 	{
+		// sample the brdf for indirect illumination
 		auto ind_sample = sample_brdf(kd, ks, n, v, norm, rng->next_vec2f(), rng->next_float());
+		// pick direction and pdf
 		vec3f ind_dir = ind_sample.first;
 		float ind_pdf = ind_sample.second;
 
+		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, ind_dir), 0.0f) * eval_brdf(kd, ks, n, v, ind_dir, norm, mf);
 		ray3f ind_ray = ray3f(pos, ind_dir);
+		// accumulate recersively scaled by brdf*cos/pdf
 		vec3f c_ind = pathtrace_ray(scene, ind_ray, rng, depth + 1) / ind_pdf; //depth??
-
 		vec3f shade = brdfcos * c_ind;
 
 		c += shade;
 	}
-    // sample the brdf for indirect illumination
-        // pick direction and pdf
-        // compute the material response (brdf*cos)
-        // accumulate recersively scaled by brdf*cos/pdf
+    
+        
+        
+        
     
     // return the accumulated color
     return c;
