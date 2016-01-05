@@ -1,4 +1,4 @@
-﻿Compilazione avviata 04/01/2016 18:38:30.
+﻿Compilazione avviata 05/01/2016 10:42:05.
      1>Progetto "C:\Users\Istin\Documents\Foundation of Computer Graphics\HW05\out (5)\pathtrace.vcxproj" sul nodo 2 (destinazioni: Build).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Za /Zc:wchar_t /Zc:forScope /Fo"build\Release\\" /Fd"build\Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt src\pathtrace.cpp
@@ -36,4 +36,4 @@
 
 Compilazione completata.
 
-Tempo trascorso 00:00:05.27
+Tempo trascorso 00:00:05.77

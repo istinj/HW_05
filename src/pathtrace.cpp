@@ -38,7 +38,7 @@ vec3f lookup_scaled_texture(vec3f value, image3f* texture, vec2f uv, bool tile =
 		ii = clamp_tile(ii, texture->width(), tile);
 		jj = clamp_tile(jj, texture->height(), tile);
 
-		value = texture->at(i, j)*(1 - s)*(1 - t) +
+		value *= texture->at(i, j)*(1 - s)*(1 - t) +
 			texture->at(i, jj)*(1 - s)*t +
 			texture->at(ii, j)*s*(1 - t) +
 			texture->at(ii, jj)*s*t;
