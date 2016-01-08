@@ -1,6 +1,6 @@
 {
-    "lookat_camera": { "from": [0,4.5,12], "to": [0,3,0] },
-    "json_meshes": "models/3D_Models_v2/JSON/complex_custom_scene.json",
+    "lookat_camera": { "from": [0,4.5,11], "to": [0,3,0] },
+    "json_meshes": "models/3D_Models_v2/JSON/complex_custom_scene_FRIDGE_TEXTURE.json",
     "surfaces": [
         {
             "frame": { "o": [0,9.5,0], "x": [1,0,0], "y": [0,0,1], "z": [0,-1,0] },
@@ -10,6 +10,6 @@
     ],
     "background": [0.2,0.2,0.2],
     "image_samples": 32,
-    "path_max_depth": 0,
+    "path_max_depth": 1,
     "path_shadows": true
 }

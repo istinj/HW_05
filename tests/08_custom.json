@@ -1,6 +1,6 @@
 {
     "lookat_camera": { "from": [0,4,10], "to": [0,4,0] },
-    "json_meshes": "models/3D_Models_v2/JSON/complex_custom_scene.json",
+    "json_meshes": "models/3D_Models_v2/JSON/complex_custom_scene_FRIDGE_TEXTURE.json",
     "surfaces": [
         {
             "frame": { "o": [-3,9.5,0], "x": [1,0,0], "y": [0,0,1], "z": [0,-1,0] },
