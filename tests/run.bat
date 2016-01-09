@@ -11,3 +11,5 @@
 ..\bin\Release\pathtrace 06_cb_direct.json
 
 ..\bin\Release\pathtrace 07_cb_indirect.json
+
+..\bin\Release\pathtrace 08_custom_01.json

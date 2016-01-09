@@ -396,9 +396,14 @@ int main(int argc, char** argv) {
         scene->image_width = scene->camera->width * scene->image_height / scene->camera->height;
     }
     accelerate(scene);
+	std::chrono::high_resolution_clock::time_point t_0, t_1;
+	t_0 = std::chrono::high_resolution_clock::now();
     message("rendering %s ... ", scene_filename.c_str());
     auto image = pathtrace(scene,true);
     write_png(image_filename, image, true);
     delete scene;
     message("done\n");
+	t_1 = std::chrono::high_resolution_clock::now();
+	double execution_time = (std::chrono::duration_cast<std::chrono::microseconds>(t_1 - t_0).count() / 1e06);
+	message("Execution time: %f s \n", execution_time);
 }
