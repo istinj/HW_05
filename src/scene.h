@@ -175,6 +175,10 @@ struct Scene {
     int                 path_max_depth = 2;     // maximum path depth
     bool                path_sample_brdf = true;// sample brdf in path tracing
     bool                path_shadows = true;    // whether to compute shadows
+
+	// -------- Extra Depth of Field ---------//
+	float				aperture = 0.0f;
+	float				f_depth = 0.0f;
 };
 
 // grab all scene textures

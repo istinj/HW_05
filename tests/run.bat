@@ -13,3 +13,5 @@
 ..\bin\Release\pathtrace 07_cb_indirect.json
 
 ..\bin\Release\pathtrace 08_custom_01.json
+
+..\bin\Release\pathtrace 09_depth_of_field.json

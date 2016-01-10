@@ -338,6 +338,35 @@ void pathtrace(Scene* scene, image3f* image, RngImage* rngs, int offset_row, int
                     auto ray = transform_ray(scene->camera->frame,
                         ray3f(zero3f,normalize(vec3f((u-0.5f)*scene->camera->width,
                                                      (v-0.5f)*scene->camera->height,-1))));
+
+					// ------------ EXTRA - DEPTH OF FIELD -----------//
+					if (scene->aperture != 0)
+					{
+						float a = scene->aperture;
+						float focus = scene->f_depth;
+						auto pixel = vec2f(scene->camera->width / scene->image_width,
+							scene->camera->height / scene->image_height);
+
+						// uniformly sampled 2D points
+						vec2f s = rng->next_vec2f();
+						vec2f r = rng->next_vec2f();
+
+						// Point on the lens plane
+						vec3f F = zero3f + 
+							vec3f((0.5 - s.x) * a, (0.5f - s.y) * a, 0.0f);
+						
+						// Point on the image plane
+						vec3f Q = zero3f + 
+							vec3f((i + 0.5f - r.x) * pixel.x - 0.5, 
+							(j + 0.5 - r.y) * pixel.y - 0.5, 0.0f)*focus - 
+							vec3f(0, 0, focus);
+
+						// New aperture ray
+						ray3f aperture_ray = ray3f(F, normalize(Q - F));
+
+						ray = transform_ray(scene->camera->frame, aperture_ray);
+					}
+
                     // set pixel to the color raytraced with the ray
                     image->at(i,j) += pathtrace_ray(scene,ray,rng,0);
                 }
