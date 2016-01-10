@@ -63,7 +63,8 @@ vec3f eval_brdf(vec3f kd, vec3f ks, float n, vec3f v, vec3f l, vec3f norm, bool 
 	{
 		auto d = ((n + 2) / (2 * pif)) * pow(max(0.0f, dot(h, norm)), n);
 		auto f = ks + (one3f - ks) * (1 - dot(h, l));
-		auto g_temp = min((2.0f * dot(h, norm) * dot(v, norm)) / dot(v, h), (2.0f * dot(h, norm) * dot(l, norm)) / dot(l, h));
+		auto g_temp = min((2.0f * dot(h, norm) * dot(v, norm)) / dot(v, h), 
+			(2.0f * dot(h, norm) * dot(l, norm)) / dot(l, h));
 		auto g = min(1.0f, g_temp);
 
 		resulting_brdf = (d * g * f) / (4.0f * dot(l, norm) * dot(v, norm));
@@ -73,6 +74,7 @@ vec3f eval_brdf(vec3f kd, vec3f ks, float n, vec3f v, vec3f l, vec3f norm, bool 
 
 // evaluate the environment map
 vec3f eval_env(vec3f ke, image3f* ke_txt, vec3f dir) {
+
     // YOUR CODE GOES HERE ----------------------
 	float u = atan2(dir.x, dir.z) / (2.0f * pif);
 	float v = 1.0f - acos(dir.y) / pif;
@@ -120,8 +122,10 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
     
     // if not hit, return background (looking up the texture by converting the ray direction to latlong around y)
     if(! intersection.hit) {
+
         // YOUR CODE GOES HERE ----------------------
 		return eval_env(scene->background, scene->background_txt, ray.d);
+
     }
     
     // setup variables for shorter code
@@ -178,6 +182,7 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 		// skip if no emission from surface
 		if (surf_->mat->ke == zero3f)
 			continue;
+
 		// pick a point on the surface, grabbing normal, area and texcoord
 		vec2f uv;
 		vec3f N_l, S;
@@ -188,6 +193,7 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 		{
 			// generate a 2d random number
 			uv = rng->next_vec2f();
+
 			// compute light position, normal, area
 			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5f, uv.y - 0.5f, 0.0f)); // ????
 			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
@@ -196,11 +202,13 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 			// set tex coords as random value got before
 			intersection.texcoord = uv;
 		}
+
 		// else
 		else
 		{
 			// generate a 2d random number
 			uv = rng->next_vec2f();
+
 			// compute light position, normal, area
 			S = transform_point(surf_->frame, 2.0f * surf_->radius * vec3f(uv.x - 0.5, uv.y - 0.5, 0.0f)); // ????
 			N_l = transform_normal(surf_->frame, vec3f(0.0f, 0.0f, 1.0f));
@@ -219,6 +227,7 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 
 		// compute light response
 		vec3f c_l = L_e * max(0.0f, -(1) * dot(N_l, light_dir)) / lengthSqr(pos - S);
+
 		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, light_dir), 0.0f) * eval_brdf(kd, ks, n, v, light_dir, norm, mf);
 		
@@ -236,32 +245,26 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 			if (!intersect_shadow(scene, shadow_ray))
 				c += shade;
 		}
+
 		// else
 		else
 			// else just accumulate
 			c += shade;
 	}
-
-
-
-
-        
-        
-            
-        
-            
     
     // YOUR ENVIRONMENT LIGHT CODE GOES HERE ----------------------
 	if (scene->background_txt != nullptr)
 	{
 		// sample the brdf for environment illumination if the environment is there
 		auto env_sample = sample_brdf(kd, ks, n, v, norm, rng->next_vec2f(), rng->next_float());
+
 		// pick direction and pdf
 		vec3f env_dir = env_sample.first;
 		float env_pdf = env_sample.second;
 
 		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, env_dir), 0.0f) * eval_brdf(kd, ks, n, v, env_dir, norm, mf);
+
 		// accumulate recersively scaled by brdf*cos/pdf
 		vec3f c_env = eval_env(scene->background, scene->background_txt, env_dir) / env_pdf;
 		vec3f shade = brdfcos * c_env;
@@ -274,25 +277,19 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 			if (!intersect_shadow(scene, shadow_ray_env))
 				c += shade;
 		}
+
 		// else
 		else
 			// else just accumulate
 			c += shade;
-	}
-    
-        
-        
-        
-            
-                
-            
-                
+	}      
 
     // YOUR INDIRECT ILLUMINATION CODE GOES HERE ----------------------
 	if (depth < scene->path_max_depth)
 	{
 		// sample the brdf for indirect illumination
 		auto ind_sample = sample_brdf(kd, ks, n, v, norm, rng->next_vec2f(), rng->next_float());
+
 		// pick direction and pdf
 		vec3f ind_dir = ind_sample.first;
 		float ind_pdf = ind_sample.second;
@@ -300,16 +297,13 @@ vec3f pathtrace_ray(Scene* scene, ray3f ray, Rng* rng, int depth) {
 		// compute the material response (brdf*cos)
 		vec3f brdfcos = max(dot(norm, ind_dir), 0.0f) * eval_brdf(kd, ks, n, v, ind_dir, norm, mf);
 		ray3f ind_ray = ray3f(pos, ind_dir);
+
 		// accumulate recersively scaled by brdf*cos/pdf
 		vec3f c_ind = pathtrace_ray(scene, ind_ray, rng, depth + 1) / ind_pdf; //depth??
 		vec3f shade = brdfcos * c_ind;
 
 		c += shade;
 	}
-    
-        
-        
-        
     
     // return the accumulated color
     return c;
@@ -371,6 +365,7 @@ void pathtrace(Scene* scene, image3f* image, RngImage* rngs, int offset_row, int
                     image->at(i,j) += pathtrace_ray(scene,ray,rng,0);
                 }
             }
+
             // scale by the number of samples
             image->at(i,j) /= (scene->image_samples*scene->image_samples);
         }
